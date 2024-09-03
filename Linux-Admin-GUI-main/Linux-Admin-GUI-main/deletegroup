@@ -1,0 +1,11 @@
+#!/bin/bash
+
+groupname=$(whiptail --inputbox "Enter the group name to delete:" 8 40 3>&1 1>&2 2>&3)
+
+# Check if group exists, delete if it does
+if getent group "$groupname" > /dev/null 2>&1; then
+    sudo groupdel "$groupname"
+    whiptail --msgbox "Group $groupname has been deleted." 8 40
+else
+    whiptail --msgbox "Group $groupname does not exist." 8 40
+fi

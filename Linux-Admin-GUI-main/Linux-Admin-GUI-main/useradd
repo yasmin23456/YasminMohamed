@@ -1,0 +1,13 @@
+#!/bin/bash
+
+username=$(whiptail --inputbox "Enter the username:" 8 40 3>&1 1>&2 2>&3)
+
+# Check if user exists, add if not
+if id "$username" &>/dev/null; then
+    whiptail --msgbox "User $username already exists." 8 40
+else
+    password=$(whiptail --passwordbox "Enter the password:" 8 40 3>&1 1>&2 2>&3)
+    sudo useradd -m "$username"
+    echo "$username:$password" | sudo chpasswd
+    whiptail --msgbox "User $username has been added." 8 40
+fi

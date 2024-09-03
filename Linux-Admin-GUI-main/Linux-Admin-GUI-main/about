@@ -1,0 +1,4 @@
+#!/bin/bash
+
+whiptail --msgbox " This program is a GUI for user and group administration tasks V1.0 for any bugs or notices please send me a message     
+    It was made by Mohamed Wael Mohamed Madih " 0 0

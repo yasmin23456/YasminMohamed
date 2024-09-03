@@ -1,0 +1,11 @@
+#!/bin/bash
+
+groupname=$(whiptail --inputbox "Enter the group name:" 8 40 3>&1 1>&2 2>&3)
+
+# Check if group exists or not
+if getent group "$groupname" > /dev/null 2>&1; then
+    whiptail --msgbox "Group $groupname already exists." 8 40
+else
+    sudo groupadd "$groupname"
+    whiptail --msgbox "Group $groupname has been added." 8 40
+fi

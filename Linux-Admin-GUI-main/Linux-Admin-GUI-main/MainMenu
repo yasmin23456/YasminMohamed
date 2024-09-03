@@ -1,0 +1,127 @@
+#!/bin/bash
+
+while true; do
+    MAIN_OPTION=$(whiptail --title "Main Menu" --menu "Choose an option" 15 60 4 \
+    "1" "User Administration" \
+    "2" "Group Administration" \
+    "3" "About" \
+    "4" "Exit" 3>&1 1>&2 2>&3)
+
+    exitstatus=$?
+    if [ $exitstatus = 0 ]; then
+        case $MAIN_OPTION in
+            1)
+                while true; do
+                    SUB_OPTION_1=$(whiptail --title "Option 1 Menu" --menu "Choose a task for Option 1" 15 60 5 \
+		    "User Add" "Add a user to the system" \
+                    "Change Password" "Change Password of a user" \
+                    "List Users" "List all users on the system" \
+                    "Delete User" "Delete an existing user" \
+                    "Enable User" "Unlock the user account" \
+                    "Disable User" "Lock the user account" \
+                    "Modify User" "Modify an existing user" \
+                    "User Info" "Get Informations about user" \
+                    "Go Back" "" 3>&1 1>&2 2>&3)
+
+                    case $SUB_OPTION_1 in
+                            "User Add")
+
+                                ./useradd ;;
+
+                            "Change Password")
+
+                                ./changepassword ;;
+
+                            "List Users")
+                                ./listusers ;;
+
+                           "Delete User")
+                                ./deleteuser ;;
+
+                           "Enable User")
+                                ./enableuser ;;
+
+                           "Disable User")
+                                ./disableuser ;;
+
+                           "Modify User")
+                                ./modifyuser ;;
+
+                          "User Info")
+                                ./userinfo ;;
+
+                          "Go Back")
+                            break  # Go back to the main menu
+                            ;;
+
+                        *)
+                            echo "Invalid option. Please try again."
+                            ;;
+                    esac
+                done
+                ;;
+            2)
+                while true; do
+                    SUB_OPTION_2=$(whiptail --title "Option 2 Menu" --menu "Choose a task for Option 2" 15 60 5 \
+ 			"Group Add" "Add a user group to the system" \
+                        "Delete Group" "Delete an existing group" \
+                        "List Groups" "List all groups on the system" \
+                        "Modify Group" "Modify a group and its list of members" \
+                        "Go Back" "" 3>&1 1>&2 2>&3)
+
+                    case $SUB_OPTION_2 in
+  			   "Group Add")
+                                ./groupadd ;;
+
+                           "Delete Group")
+                                ./deletegroup ;;
+
+                           "List Groups")
+                                ./listgroups ;;
+
+                           "Modify Group")
+                                ./modifygroup ;;
+
+                           "Go Back")
+                            break  # Go back to the main menu
+                            ;;
+
+                        *)
+                            echo "Invalid option. Please try again."
+                            ;;
+                    esac
+                done
+                ;;
+            3)
+                while true; do
+                    SUB_OPTION_3=$(whiptail --title "Option 3 Menu" --menu "Choose a task for Option 3" 15 60 4 \
+                    "About" "Informations about this program" \
+                    "Go Back" "" 3>&1 1>&2 2>&3)
+
+                    case $SUB_OPTION_3 in
+       			   "About")
+                                ./about ;;
+
+                           "Go Back")
+                            break  # Go back to the main menu
+                            ;;
+
+                        *)
+                            echo "Invalid option. Please try again."
+                            ;;
+                    esac
+                done
+                ;;
+            4)
+                echo "Exiting the script. Goodbye!"
+                exit 0
+                ;;
+            *)
+                echo "Invalid option. Please try again."
+                ;;
+        esac
+    else
+        echo "You chose Cancel."
+        exit 1
+    fi
+done

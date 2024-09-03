@@ -1,0 +1,11 @@
+#!/bin/bash
+
+username=$(whiptail --inputbox "Enter the username to delete:" 8 40 3>&1 1>&2 2>&3)
+
+# Check if user exists, delete if it does
+if id "$username" &>/dev/null; then
+    sudo userdel -r "$username"
+    whiptail --msgbox "User $username has been deleted." 8 40
+else
+    whiptail --msgbox "User $username does not exist." 8 40
+fi

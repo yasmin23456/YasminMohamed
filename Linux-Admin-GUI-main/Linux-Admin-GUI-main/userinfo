@@ -1,0 +1,18 @@
+#!/bin/bash
+
+username=$(whiptail --inputbox "Enter the username to get chage information:" 8 40 3>&1 1>&2 2>&3)
+
+if [ $? -ne 0 ] || [ -z "$username" ]; then
+    whiptail --msgbox "Operation cancelled or invalid username." 8 40
+    exit 1
+fi
+
+# Check if the user exists
+if id "$username" &>/dev/null; then
+# Get the chage 
+    chage_info=$(sudo chage -l "$username")
+    
+    whiptail --msgbox "Chage information for user $username:\n\n$chage_info" 20 60
+else
+    whiptail --msgbox "User $username does not exist." 8 40
+fi

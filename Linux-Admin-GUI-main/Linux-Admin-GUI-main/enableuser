@@ -1,0 +1,11 @@
+#!/bin/bash
+
+username=$(whiptail --inputbox "Enter the username to enable:" 8 40 3>&1 1>&2 2>&3)
+
+# Check if user exists, enable if it does
+if id "$username" &>/dev/null; then
+    sudo usermod -U "$username"
+    whiptail --msgbox "User $username has been enabled." 8 40
+else
+    whiptail --msgbox "User $username does not exist." 8 40
+fi
